@@ -13,7 +13,7 @@ import { TaskDefinition } from "@/types/task";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { myAction } from "./actions";
+import { createTaskDefinition } from "./actions";
 import { Textarea } from "@/components/ui/textarea";
 import { useFieldArray } from "react-hook-form";
 import { Input } from "@/components/ui/input";
@@ -23,7 +23,6 @@ export function TaskForm() {
     const form = useForm<z.infer<typeof TaskDefinition>>({
         resolver: zodResolver(TaskDefinition),
         defaultValues: {
-            //            params: [{value: ""}]
         }
     });
 
@@ -34,7 +33,7 @@ export function TaskForm() {
 
     function onSubmit(values: z.infer<typeof TaskDefinition>) {
         console.log(values);
-        myAction(values);
+        createTaskDefinition(values);
     }
 
     return (
