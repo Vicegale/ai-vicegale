@@ -1,7 +1,6 @@
 import { z } from "zod";
 
-export const task = z.object({
+export const TaskDefinition = z.object({
     "prompt": z.string(),
-    "input": z.string(),
-    "params": z.object({})
+    "params": z.array(z.object({value:z.string()})) 
 });
