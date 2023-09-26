@@ -10,7 +10,7 @@ export async function createTaskDefinition(values: z.infer<typeof TaskDefinition
     const userId = user?.id;
     console.log(userId);
     console.log(values);
-    const q = `INSERT INTO TaskDefinition (userId, prompt, parameters) VALUES ('${userId}', '${values.prompt}', json('${JSON.stringify(values.params)}'))`;
+    const q = `INSERT INTO TaskDefinition (userId, prompt, inputParameters, outputParameters) VALUES ('${userId}', '${values.prompt}', json('${JSON.stringify(values.inputParams)}'), json('${JSON.stringify(values.outputParams)}'))`;
     console.log(q);
     const client = createClient({
         url: process.env.TURSO_URL!,

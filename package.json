@@ -41,6 +41,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "dbgen": "drizzle-kit generate:sqlite",
     "dbpush": "drizzle-kit push:sqlite"
   },
   "devDependencies": {

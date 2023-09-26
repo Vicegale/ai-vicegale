@@ -26,8 +26,13 @@ export function TaskForm() {
         }
     });
 
-    const { fields, append } = useFieldArray({
-        name: "params",
+    const inputParamsFieldArray = useFieldArray({
+        name: "inputParams",
+        control: form.control
+    });
+
+    const outputParamsFieldArray = useFieldArray({
+        name: "outputParams",
         control: form.control
     });
 
@@ -56,15 +61,15 @@ export function TaskForm() {
                     )} />
                 <div>
                     <FormItem>
-                        <FormLabel>Parameters</FormLabel>
+                        <FormLabel>Input Parameters</FormLabel>
                         <FormDescription>
                             Add parameters to control the response of this task.
                         </FormDescription>
-                        {fields.map((field, index) => (
+                        {inputParamsFieldArray.fields.map((field, index) => (
                             <FormField
                                 control={form.control}
                                 key={field.id}
-                                name={`params.${index}.value`}
+                                name={`inputParams.${index}.value`}
                                 render={({ field }) => (
                                     <>
                                         <FormControl>
@@ -81,7 +86,39 @@ export function TaskForm() {
                         variant="outline"
                         size="sm"
                         className="mt-2"
-                        onClick={() => append({ value: "" })}
+                        onClick={() => inputParamsFieldArray.append({ value: "" })}
+                    >
+                        <Plus />
+                    </Button>
+                </div>
+                <div>
+                    <FormItem>
+                        <FormLabel>Output Parameters</FormLabel>
+                        <FormDescription>
+                            Add parameters the model should output in its JSON response.
+                        </FormDescription>
+                        {outputParamsFieldArray.fields.map((field, index) => (
+                            <FormField
+                                control={form.control}
+                                key={field.id}
+                                name={`outputParams.${index}.value`}
+                                render={({ field }) => (
+                                    <>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </>
+                                )}
+                            />
+                        ))}
+                    </FormItem>
+                    <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="mt-2"
+                        onClick={() => outputParamsFieldArray.append({ value: "" })}
                     >
                         <Plus />
                     </Button>
