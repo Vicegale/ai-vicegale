@@ -2,11 +2,15 @@
 
 import { TaskDefinition } from "@/types/task";
 import { z } from "zod";
-import { sql } from '@vercel/postgres';
+import { createClient } from "@libsql/client";
 
 export async function createTaskDefinition(values: z.infer<typeof TaskDefinition>) {
     console.log(values);
-    const q = `INSERT INTO TaskDefinition (id, prompt, params) VALUES (1, '${values.prompt}', '${JSON.stringify(values.params)}'::json)`;
+    const q = `INSERT INTO TaskDefinition (userId, prompt, parameters) VALUES ("google_id", '${values.prompt}', json('${JSON.stringify(values.params)}'))`;
     console.log(q);
-    await sql`${q}`
+    const client = createClient({
+        url: process.env.TURSO_URL!,
+        authToken: process.env.TURSO_SECRET!,
+    }); 
+    await client.execute(q);
 }
