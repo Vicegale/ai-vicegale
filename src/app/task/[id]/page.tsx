@@ -14,13 +14,13 @@ export default async function Page({ params }: { params: { id: number } }) {
                 <div className="w-1/2 pr-4">
                     <p className="text-gray-400 text-lg">Input Parameters:</p>
                     <ul className="list-disc pl-6">
-                    {definition?.inputParams.map((i) => <li>{i.value}</li>)}
+                    {definition?.inputParams.map((i, idx) => <li key={idx}>{i.value}</li>)}
                     </ul>
                 </div>
                 <div className="w-1/2">
                     <p className="text-gray-400 text-lg">Output Parameters:</p>
                     <ul className="list-disc pl-6">
-                    {definition?.outputParams.map((i) => <li>{i.value}</li>)}
+                    {definition?.outputParams.map((i, idx) => <li key={idx}>{i.value}</li>)}
                     </ul>
                 </div>
             </div>
