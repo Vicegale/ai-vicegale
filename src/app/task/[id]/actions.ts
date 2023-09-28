@@ -1,3 +1,5 @@
+"use server"
+
 import { TaskDefinition } from "@/types/task";
 import { createClient } from "@libsql/client";
 import { z } from "zod";
