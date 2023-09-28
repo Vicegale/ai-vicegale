@@ -52,7 +52,7 @@ export default function TaskDisplay(props: { id: number }) {
                     <p className="text-gray-400 text-lg">Input Parameters:</p>
                     <ul className="list-disc pl-6">
                         {mode == "DISPLAY" && task?.inputParams.map((i, idx) => <li key={idx}>{i.value}</li>)}
-                        {mode == "EDIT" && task?.inputParams.map((i, idx) => <input onChange={(e) => updateFormInputs(i.value, e.target.value)} type="text" key={idx} placeholder={i.value} />)}
+                        {mode == "EDIT" && task?.inputParams.map((i, idx) => <><input onChange={(e) => updateFormInputs(i.value, e.target.value)} type="text" key={idx} placeholder={i.value} /><br/></>)}
                     </ul>
                 </div>
                 <div className="w-1/2">
