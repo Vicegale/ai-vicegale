@@ -4,6 +4,7 @@ import { TaskDefinition } from "@/types/task";
 import { z } from "zod";
 import { createClient } from "@libsql/client";
 import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation"
 
 export async function createTaskDefinition(values: z.infer<typeof TaskDefinition>) {
     const user = await currentUser();
@@ -16,5 +17,6 @@ export async function createTaskDefinition(values: z.infer<typeof TaskDefinition
         url: process.env.TURSO_URL!,
         authToken: process.env.TURSO_SECRET!,
     }); 
-    await client.execute(q);
+    const result = await client.execute(q);
+    redirect("/task/"+result.lastInsertRowid);
 }

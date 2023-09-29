@@ -36,9 +36,9 @@ export function TaskForm() {
         control: form.control
     });
 
-    function onSubmit(values: z.infer<typeof TaskDefinition>) {
+    async function onSubmit(values: z.infer<typeof TaskDefinition>) {
         console.log(values);
-        createTaskDefinition(values);
+        const newTaskId = await createTaskDefinition(values);
     }
 
     return (
