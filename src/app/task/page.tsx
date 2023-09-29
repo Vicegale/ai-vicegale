@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { fetchTasks } from "./actions"
 import { TaskDefinition } from "@/types/task";
 
@@ -10,7 +11,7 @@ export default async function Page() {
         <h1>Tasks</h1>
         <ul>
             {tasks.map((task, idx) => (<>
-                <a href={`task/${idx}`} key={idx}>{task.prompt}</a><br />
+                <Link href={`task/${idx}`} key={idx}>{task.prompt}</Link><br />
             </>))}
         </ul>
     </div>
